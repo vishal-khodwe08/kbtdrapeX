@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virtual Saree Draping</title>
+</head>
+
+<body>
+
+<h2>Upload Person Image</h2>
+
+<form id="uploadForm">
+
+<input type="file" name="person" required><br><br>
+
+<h2>Upload Saree Image</h2>
+
+<input type="file" name="saree" required><br><br>
+
+<button type="submit">Generate Try-On</button>
+
+</form>
+
+<br>
+
+<img id="result" width="400"/>
+
+<script>
+
+document.getElementById("uploadForm").onsubmit = async function(e){
+
+e.preventDefault();
+
+let formData = new FormData(this);
+
+let response = await fetch("/tryon/",{
+method:"POST",
+body:formData
+});
+
+let data = await response.json();
+
+document.getElementById("result").src = data.result;
+
+}
+
+</script>
+
+</body>
+</html>
